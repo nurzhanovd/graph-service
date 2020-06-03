@@ -1,0 +1,7 @@
+node_modules
+.idea
+dist
+docker/neo4j/dbdata
+public
+build
+.env

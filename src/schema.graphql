@@ -1,0 +1,78 @@
+type KeyValueContent {
+    uuid: ID!
+    key: String
+    type: String
+    value: String
+    order: Int
+    orderForField: String
+}
+
+type FOG {
+    uuid: ID!
+    contents: [KeyValueContent] @relation(name: "HAS_CONTENT", direction: "OUT")
+    prerequisites: [FOG] @relation(name: "DEPENDS_ON", direction: "OUT")
+    postrequisites: [FOG] @relation(name: "DEPENDS_ON", direction: "IN")
+    partOfSog: [SOG] @relation(name: "DEPENDS_ON", direction: "IN")
+}
+
+
+type SOG {
+    uuid: ID!
+    contents: [KeyValueContent] @relation(name: "HAS_CONTENT", direction: "OUT")
+    children: [SOG] @relation(name: "DEPENDS_ON", direction: "OUT")
+    parents: [SOG] @relation(name: "DEPENDS_ON", direction: "IN")
+    fogs: [FOG] @relation(name: "DEPENDS_ON", direction: "OUT")
+}
+
+type File {
+  filename: ID!
+  mimetype: String!
+  encoding: String!
+}
+
+scalar Upload
+
+type AuthError {
+  key: String!
+  value: String!
+}
+
+type AuthPayload {
+  token: String
+  name: String
+  uuid: String
+  surname: String
+  email: String
+  username: String
+  errors: [AuthError]
+}
+
+type Mutation {
+  DeleteFileAndRemoveFromDb(filename:ID!): File
+  UploadFile(file: Upload!): File!
+  SignUp(name: String!, surname: String!, username: String!, email: String!, password: String!, confirmPassword: String!): AuthPayload
+  SignIn(login: String!, password: String!): AuthPayload
+}
+
+type Node {
+  uuid: ID!
+  type: String
+}
+
+type Rel {
+  from: String
+  to: String
+}
+
+type RST {
+  nodes: [Node]
+  nodeRels: [Rel]
+  nodeContents: [KeyValueContent]
+  nodeContentRels: [Rel]
+}
+
+scalar Void
+
+type Query {
+  RecursiveSOGTree(uuid: ID!): RST
+}
