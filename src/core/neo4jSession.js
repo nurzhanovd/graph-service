@@ -1,5 +1,7 @@
 import {session} from 'neo4j-driver';
 
+import driver from '../driver';
+
 /**
  * @param {Driver} driver
  * @return function

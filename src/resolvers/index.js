@@ -2,8 +2,9 @@ import fs from 'fs';
 import {FileManager, genFileName} from './file-manager';
 import {ApolloClient} from 'apollo-client';
 import {driver as Driver} from 'neo4j-driver';
-import RecursiveSOGTree from './rst';
-import {SignIn, SignUp} from './auth';
+import {SignIn, SignUp} from './Auth';
+import {TreeNode} from './TreeNode';
+import {CreateRoadMap} from './RoadMap';
 
 // noinspection JSUnusedGlobalSymbols
 /**
@@ -12,7 +13,7 @@ import {SignIn, SignUp} from './auth';
  */
 export default (client, driver) => ({
   Query: {
-    RecursiveSOGTree: RecursiveSOGTree(driver)
+    TreeNode: TreeNode(driver)
   },
 
   Mutation: {
@@ -52,5 +53,6 @@ export default (client, driver) => ({
 
     SignUp: SignUp(driver),
     SignIn: SignIn(driver),
+    CreateRoadMap: CreateRoadMap(driver),
   },
 })
