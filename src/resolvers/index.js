@@ -4,6 +4,7 @@ import {ApolloClient} from 'apollo-client';
 import {driver as Driver} from 'neo4j-driver';
 import {SignIn, SignUp} from './Auth';
 import {TreeNode} from './TreeNode';
+import {FulfillNode,IsNodeFulFilled,NodeToRootPath,NodeNeighbours} from './LearningNode';
 import {CreateRoadMap} from './RoadMap';
 import {SearchForNodesAndTags} from './Search'
 
@@ -14,6 +15,9 @@ import {SearchForNodesAndTags} from './Search'
 export default (client, driver) => ({
   Query: {
     TreeNode: TreeNode(driver),
+    IsNodeFulFilled: IsNodeFulFilled(driver),
+    NodeToRootPath: NodeToRootPath(driver),
+    NodeNeighbours: NodeNeighbours(driver),
     SearchForNodesAndTags: SearchForNodesAndTags(driver),
   },
 
@@ -55,5 +59,6 @@ export default (client, driver) => ({
     SignUp: SignUp(driver),
     SignIn: SignIn(driver),
     CreateRoadMap: CreateRoadMap(driver),
+    FulfillNode: FulfillNode(driver),
   },
 })
