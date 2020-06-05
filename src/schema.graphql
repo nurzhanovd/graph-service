@@ -10,6 +10,13 @@ type File {
 type Node {
   uuid: ID!
   title: String!
+  childes: [Node] @relation(name: "DEPENDS_ON", direction: "OUT")
+}
+
+type Tag {
+  uuid: ID!
+  title: String
+  for: [Node] @relation(name: "TAGGED", direction: "OUT")
 }
 
 type Relation {
@@ -22,9 +29,17 @@ type TreeNodePayload {
   rels: [Relation]
 }
 
+type GenericSearchResult {
+  uuid: ID!
+  title: String
+  description: String
+  score: Int!
+  type: String
+}
 
 type Query {
   TreeNode(uuid: ID!): TreeNodePayload
+  SearchForNodesAndTags(searchString: String!, limit: Int, offset: Int): [GenericSearchResult]
 }
 
 type AuthError {

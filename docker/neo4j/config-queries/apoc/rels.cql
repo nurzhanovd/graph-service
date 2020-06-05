@@ -1,8 +1,8 @@
-call apoc.load.json("learning-nodes-relations.json") yield value
+CALL apoc.load.json('learning-nodes-relations.json') YIELD value
 
-unwind value.uuid as root
-unwind value.childes as rel
+UNWIND value.uuid AS root
+UNWIND value.childes AS rel
 
-match (r:Node { uuid: root }), (c:Node { uuid: rel })
+MATCH (r:Node {uuid: root}), (c:Node {uuid: rel})
 
-merge (r)-[:DEPENDS_ON]->(c)
+MERGE (r)-[:DEPENDS_ON]->(c)
