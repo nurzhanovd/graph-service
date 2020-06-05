@@ -5,15 +5,16 @@ import {driver as Driver} from 'neo4j-driver';
 import {SignIn, SignUp} from './Auth';
 import {TreeNode} from './TreeNode';
 import {CreateRoadMap} from './RoadMap';
+import {SearchForNodesAndTags} from './Search'
 
-// noinspection JSUnusedGlobalSymbols
 /**
  * @param {Driver} driver
  * @param {ApolloClient}  client
  */
 export default (client, driver) => ({
   Query: {
-    TreeNode: TreeNode(driver)
+    TreeNode: TreeNode(driver),
+    SearchForNodesAndTags: SearchForNodesAndTags(driver),
   },
 
   Mutation: {
