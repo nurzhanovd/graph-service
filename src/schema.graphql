@@ -9,8 +9,12 @@ type File {
 
 type Node {
   uuid: ID!
+  root: Boolean
   title: String!
+  description: String
+  content: [String]
   childes: [Node] @relation(name: "DEPENDS_ON", direction: "OUT")
+  parent: Node @relation(name: "DEPENDS_ON", direction: "IN")
 }
 
 type Tag {
@@ -39,6 +43,9 @@ type GenericSearchResult {
 
 type Query {
   TreeNode(uuid: ID!): TreeNodePayload
+  IsNodeFulFilled(userId: ID!, nodeId: ID!): Boolean
+  NodeToRootPath(nodeId: ID!): [Node]
+  NodeNeighbours(nodeId: ID!): [Node]
   SearchForNodesAndTags(searchString: String!, limit: Int, offset: Int): [GenericSearchResult]
 }
 
@@ -49,9 +56,7 @@ type AuthError {
 
 type AuthPayload {
   token: String
-  name: String
   uuid: String
-  surname: String
   email: String
   username: String
   errors: [AuthError]
@@ -61,8 +66,8 @@ type AuthPayload {
 type Mutation {
   DeleteFileAndRemoveFromDb(filename:ID!): File
   UploadFile(file: Upload!): File!
-  SignUp(name: String!, surname: String!, username: String!, email: String!, password: String!, confirmPassword: String!): AuthPayload
+  SignUp(username: String!, email: String!, password: String!, confirmPassword: String!): AuthPayload
   SignIn(login: String!, password: String!): AuthPayload
   CreateRoadMap(roadMapRelation: [[String]], nodeRoadMapRelation: [[String]]): String
-  FulfillNode(uuid: ID!): Void
+  FulfillNode(uuid: ID!): Boolean
 }
