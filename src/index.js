@@ -3,6 +3,7 @@ import { ApolloServer } from "apollo-server-express";
 import express from "express";
 import driver from 'driver';
 import client from 'client';
+import context from 'context';
 import resolvers from 'resolvers'
 import { makeAugmentedSchema } from "neo4j-graphql-js";
 import dotenv from 'dotenv';
@@ -16,12 +17,13 @@ app.use('/static', express.static('public'))
 
 const schema = makeAugmentedSchema({
   typeDefs,
-  resolvers: resolvers(client, driver)
+  resolvers: resolvers
 });
 
+const jwt_secret = process.env.JWT_SECRET;
 
 const server = new ApolloServer({
-  context: { driver },
+  context: context(client ,driver, jwt_secret),
   schema: schema,
   introspection: true,
   playground: true

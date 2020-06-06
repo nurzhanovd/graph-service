@@ -2,7 +2,7 @@ import fs from 'fs';
 import {FileManager, genFileName} from './file-manager';
 import {ApolloClient} from 'apollo-client';
 import {driver as Driver} from 'neo4j-driver';
-import {SignIn, SignUp} from './Auth';
+import {CurrentUser, SignIn, SignUp} from './Auth';
 import {TreeNode} from './TreeNode';
 import {FulfillNode,IsNodeFulFilled,NodeToRootPath,NodeNeighbours} from './LearningNode';
 import {CreateRoadMap} from './RoadMap';
@@ -15,10 +15,11 @@ import {SearchForNodesAndTags} from './Search'
 export default (client, driver) => ({
   Query: {
     TreeNode: TreeNode(driver),
+    CurrentUser: CurrentUser,
     IsNodeFulFilled: IsNodeFulFilled(driver),
     NodeToRootPath: NodeToRootPath(driver),
     NodeNeighbours: NodeNeighbours(driver),
-    SearchForNodesAndTags: SearchForNodesAndTags(driver),
+    SearchForNodesAndTags: SearchForNodesAndTags(driver)
   },
 
   Mutation: {
@@ -55,7 +56,6 @@ export default (client, driver) => ({
           .on('finish', () => resolve()))
       return {filename: newFilename, mimetype, encoding}
     },
-
     SignUp: SignUp(driver),
     SignIn: SignIn(driver),
     CreateRoadMap: CreateRoadMap(driver),
