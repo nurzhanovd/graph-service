@@ -43,6 +43,7 @@ type GenericSearchResult {
 
 type Query {
   TreeNode(uuid: ID!): TreeNodePayload
+  CurrentUser: [AuthPayload]
   IsNodeFulFilled(userId: ID!, nodeId: ID!): Boolean
   NodeToRootPath(nodeId: ID!): [Node]
   NodeNeighbours(nodeId: ID!): [Node]

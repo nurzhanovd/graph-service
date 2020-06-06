@@ -17,7 +17,7 @@ app.use('/static', express.static('public'))
 
 const schema = makeAugmentedSchema({
   typeDefs,
-  resolvers: resolvers
+  resolvers: resolvers(client, driver)
 });
 
 const jwt_secret = process.env.JWT_SECRET;
