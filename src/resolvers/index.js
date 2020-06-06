@@ -4,9 +4,10 @@ import {ApolloClient} from 'apollo-client';
 import {driver as Driver} from 'neo4j-driver';
 import {CurrentUser, SignIn, SignUp} from './Auth';
 import {TreeNode} from './TreeNode';
+import {FulfillNode,IsNodeFulFilled,NodeToRootPath,NodeNeighbours} from './LearningNode';
 import {CreateRoadMap} from './RoadMap';
+import {SearchForNodesAndTags} from './Search'
 
-// noinspection JSUnusedGlobalSymbols
 /**
  * @param {Driver} driver
  * @param {ApolloClient}  client
@@ -14,7 +15,11 @@ import {CreateRoadMap} from './RoadMap';
 export default (client, driver) => ({
   Query: {
     TreeNode: TreeNode(driver),
-    CurrentUser: CurrentUser
+    CurrentUser: CurrentUser,
+    IsNodeFulFilled: IsNodeFulFilled(driver),
+    NodeToRootPath: NodeToRootPath(driver),
+    NodeNeighbours: NodeNeighbours(driver),
+    SearchForNodesAndTags: SearchForNodesAndTags(driver)
   },
 
   Mutation: {
@@ -54,5 +59,6 @@ export default (client, driver) => ({
     SignUp: SignUp(driver),
     SignIn: SignIn(driver),
     CreateRoadMap: CreateRoadMap(driver),
+    FulfillNode: FulfillNode(driver),
   },
 })

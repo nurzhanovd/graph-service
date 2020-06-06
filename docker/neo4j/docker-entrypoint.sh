@@ -4,6 +4,7 @@ cmd="$1"
 
 cp learning-nodes.json import
 cp learning-nodes-relations.json import
+cp roadmap.json import
 
 function running_as_root
 {
@@ -429,6 +430,8 @@ configure_db() {
   sendcql "uuid" "$auth_data"
   echo "Setting uuid field on $node_types"
   sendcql "apoc" "$auth_data"
+  echo "Setting search indices "
+  sendcql "indexes" "$auth_data"
 
   echo "Poststart config is done."
   gosu neo4j:neo4j neo4j stop
