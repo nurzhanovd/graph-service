@@ -3,7 +3,21 @@ import jwt from 'jsonwebtoken';
 import omit from 'lodash.omit';
 import {createSession, createWriteSession} from 'core/neo4jSession';
 
-export const SignUp = driver => async (_, { name, surname, username, email, password, confirmPassword }) => {
+export const CurrentUser = async (_, args, context) => {
+  const { driver, req } = context;
+  const username = req.user.username;
+  const session = createSession(driver);
+  const { records } = await session.run(`match (p:Person) where p.username="${username}" return p`);
+  if (!records.length) {
+    const [record] = records;
+    return omit(record.toObject().p.properties, ['password']);
+  }
+  session.close();
+  return null
+}
+
+export const SignUp = driver => async (_, { name, surname, username, email, password, confirmPassword }, context) => {
+  const {jwt_secret} = context;
   const session = createSession(driver);
   const { records } = await session.run(`match (p:Person) where p.username="${username}" or p.email = "${email}" return p`);
   if (!records.length) {
@@ -12,13 +26,14 @@ export const SignUp = driver => async (_, { name, surname, username, email, pass
     session.close();
     const data = omit(records[0].toObject().p.properties, ['password']);
     return {
-      token: jwt.sign({name: 1}, 'secret'),
+      token: jwt.sign({username}, jwt_secret),
       ...data,
     }
   }
 }
 
-export const SignIn = driver => async (_, {login, password}) => {
+export const SignIn = driver => async (_, {login, password}, context) => {
+  const {jwt_secret} = context
   const session = createWriteSession(driver);
   console.log(`match (p:Person) where p.username="${login}" or p.email="${password}" return p`);
   const { records } = await session.run(`match (p:Person) where p.username="${login}" or p.email="${password}" return p`);
@@ -30,7 +45,7 @@ export const SignIn = driver => async (_, {login, password}) => {
     if (bcrypt.compareSync(password, hash)) {
       console.log('success');
       return {
-        token: jwt.sign(rest, 'secret'),
+        token: jwt.sign(rest, jwt_secret),
         ...rest,
         errors: [],
       };
