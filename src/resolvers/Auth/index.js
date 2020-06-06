@@ -47,7 +47,7 @@ export const SignIn = driver => async (_, {login, password}, context) => {
   const {jwt_secret} = context
   const session = createWriteSession(driver);
   console.log(`match (p:User) where p.username="${login}" or p.email="${password}" return p`);
-  const { records } = await session.run(`match (p:Person) where p.username="${login}" or p.email="${password}" return p`);
+  const { records } = await session.run(`match (p:User) where p.username="${login}" or p.email="${password}" return p`);
   session.close();
   if (records.length) {
     const [record] = records;

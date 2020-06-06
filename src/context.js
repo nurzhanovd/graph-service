@@ -15,7 +15,8 @@ const getUserFromToken = (token, jwt_secret) => {
 export default (client, driver, jwt_secret) => ({ req }) => {
   const tokenWithBearer = req.headers.authorization || ''
   const token = tokenWithBearer.split(' ')[1]
-  req.user = getUserFromToken(token, jwt_secret);
-  return { client, driver, jwt_secret, req };
+  const jwtPayload = getUserFromToken(token, jwt_secret) || {};
+  req.user = jwtPayload;
+  return { client, driver, jwt_secret, req, cypherParams: { userId: jwtPayload.uuid, username: jwtPayload.username } };
 }
 
