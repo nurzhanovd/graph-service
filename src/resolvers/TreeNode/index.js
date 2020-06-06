@@ -8,8 +8,9 @@ const query = `
   return nodes, rels;
 `
 
-export const TreeNode = driver => async (_, { uuid }) => {
+export const TreeNode = driver => async (_, { uuid }, { req }) => {
   if (uuid) {
+    console.log(req.user)
     const session = createReadSession(driver);
     const { records } = await session.run(query, { uuid });
     const data = records[0].toObject();

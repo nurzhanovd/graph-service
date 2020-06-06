@@ -63,6 +63,16 @@ type AuthPayload {
   errors: [AuthError]
 }
 
+type Query {
+  TreeNode(uuid: ID!): TreeNodePayload
+  IsNodeFulFilled(userId: ID!, nodeId: ID!): Boolean
+  NodeToRootPath(nodeId: ID!): [Node]
+  NodeNeighbours(nodeId: ID!): [Node]
+  SearchForNodesAndTags(searchString: String!, limit: Int, offset: Int): [GenericSearchResult]
+  CurrentUser: AuthPayload
+  GetCompletedNodes: [Node]
+}
+
 
 type Mutation {
   DeleteFileAndRemoveFromDb(filename:ID!): File
