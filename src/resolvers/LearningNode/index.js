@@ -40,7 +40,7 @@ const NodeToRootPathQuery = `
 `
 
 const neighboursQuery = `
-  MATCH (:Node { uuid: $nodeId })<-[:DEPENDS_ON]-(:Node)-[:DEPENDS_ON]->(nodes:Node) return nodes
+  MATCH (:Node { uuid: $nodeId })<-[:DEPENDS_ON]-(:Node)-[:DEPENDS_ON]->(nodes:Node) return distinct(nodes)
 `
 
 export const FulfillNode = driver => async (_, { uuid }) => {
@@ -67,11 +67,8 @@ export const NodeToRootPath = driver => async (_, { nodeId }) => {
 
 export const NodeNeighbours = driver => async (_, { nodeId }) => {
   const session = createWriteSession(driver);
-  // еботня здесь смотри query выше
   const { records } = await session.run(neighboursQuery, { nodeId });
   session.close();
-  // еботная идет в stdout
-  console.log(records.map(n => n.toObject()).map(n => console.log(n.nodes.properties)))
-  return records.map(n => n.toObject()).map(n => console.log(n.nodes.properties));
+  return records.map(n => n.toObject()).map(n => n.nodes.properties);
 }
 
