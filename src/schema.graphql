@@ -107,6 +107,7 @@ type Query {
   GetCompletedNodes(nodeId: ID!): [Node]
   RoadMapSearch(searchString: String!, rootId: ID!, searchOnlyCompleted: Boolean): [Node]
   InterestedTag: [Tag]
+  SuggestedRelatedNodes: [Node]
   GetRoadMap(uuid: String): GetRoadMapResponse
 }
 
