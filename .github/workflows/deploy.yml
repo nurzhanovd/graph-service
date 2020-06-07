@@ -9,10 +9,10 @@ on:
 
 jobs:
   job_one:
-    name: Deploy
+    name: Deploy Backend
     runs-on: ubuntu-latest
     steps:
-      - name: ssh conn test
+      - name: backend
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.REMOTE_HOST }}
@@ -20,9 +20,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd ~/gg-wrap/gucci-gang
+            cd ~/gg-wrap/graph-service
             git pull origin master
             git status
-            cd ../
             docker-compose up -d --build --remove-orphans
-
