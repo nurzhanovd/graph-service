@@ -96,6 +96,5 @@ type Mutation {
   SignIn(login: String!, password: String!): AuthPayload
   CreateRoadMap(roadMap: [RoadMapInput]): Boolean
   FulfillNode(uuid: ID!): Boolean
-  CreateRoadMap: [Node]
   MergeUserWithTags(tags: [String]): Boolean
 }
