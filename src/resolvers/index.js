@@ -6,8 +6,9 @@ import {CurrentUser, SignIn, SignUp} from './Auth';
 import {TreeNode} from './TreeNode';
 import {FulfillNode,IsNodeFulFilled,NodeToRootPath,NodeNeighbours} from './LearningNode';
 import {GetCompletedNodes} from './LearningNode/GetCompletedNodes';
-import {CreateRoadMap} from './RoadMap';
 import {RoadMapSearch} from './RoadMap/RoadMapSearch';
+import {CreateRoadMap} from './RoadMap/CreateRoadMap';
+import {MergeUserWithTags,InterestedTag} from './Tag';
 import {SearchForNodesAndTags} from './Search'
 
 /**
@@ -23,7 +24,8 @@ export default (client, driver) => ({
     NodeNeighbours: NodeNeighbours(driver),
     SearchForNodesAndTags: SearchForNodesAndTags(driver),
     GetCompletedNodes: GetCompletedNodes(driver),
-    RoadMapSearch: RoadMapSearch(driver)
+    RoadMapSearch: RoadMapSearch(driver),
+    InterestedTag
   },
 
   Mutation: {
@@ -62,7 +64,8 @@ export default (client, driver) => ({
     },
     SignUp: SignUp(driver),
     SignIn: SignIn(driver),
-    CreateRoadMap: CreateRoadMap(driver),
     FulfillNode: FulfillNode(driver),
+    CreateRoadMap,
+    MergeUserWithTags,
   },
 })

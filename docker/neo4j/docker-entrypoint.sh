@@ -5,6 +5,8 @@ cmd="$1"
 cp learning-nodes.json import
 cp learning-nodes-relations.json import
 cp roadmap.json import
+cp tags.json import
+cp tagNodeRelation.json import
 
 function running_as_root
 {
