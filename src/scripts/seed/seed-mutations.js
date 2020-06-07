@@ -13,7 +13,7 @@ const strFromIdx = (idx) => {
     return str_concat
 }
 
-const namegen = function*() {
+export const namegen = function*() {
     let innerCounter = 0
     while (true){
         yield strFromIdx(innerCounter)

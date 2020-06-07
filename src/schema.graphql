@@ -68,6 +68,13 @@ type AuthPayload {
   errors: [AuthError]
 }
 
+input RoadMapInput {
+  title: String!
+  uuid: String!
+  nodes: [String]
+  next: [String]
+}
+
 type Query {
   TreeNode(uuid: ID!): TreeNodePayload
   IsNodeFulFilled(userId: ID!, nodeId: ID!): Boolean
@@ -86,7 +93,7 @@ type Mutation {
   UploadFile(file: Upload!): File!
   SignUp(username: String!, email: String!, password: String!, confirmPassword: String!): AuthPayload
   SignIn(login: String!, password: String!): AuthPayload
-#  CreateRoadMap(roadMapRelation: [[String]], nodeRoadMapRelation: [[String]]): String
+  CreateRoadMap(roadMap: [RoadMapInput]): Boolean
   FulfillNode(uuid: ID!): Boolean
   CreateRoadMap: [Node]
   MergeUserWithTags(tags: [String]): Boolean
