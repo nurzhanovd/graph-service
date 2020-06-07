@@ -8,6 +8,7 @@ import {FulfillNode,IsNodeFulFilled,NodeToRootPath,NodeNeighbours} from './Learn
 import {GetCompletedNodes} from './LearningNode/GetCompletedNodes';
 import {RoadMapSearch} from './RoadMap/RoadMapSearch';
 import {CreateRoadMap} from './RoadMap/CreateRoadMap';
+import {SuggestedRelatedNodes} from './RootNodes';
 import {MergeUserWithTags,InterestedTag} from './Tag';
 import {SearchForNodesAndTags} from './Search'
 
@@ -25,7 +26,8 @@ export default (client, driver) => ({
     SearchForNodesAndTags: SearchForNodesAndTags(driver),
     GetCompletedNodes: GetCompletedNodes(driver),
     RoadMapSearch: RoadMapSearch(driver),
-    InterestedTag
+    InterestedTag,
+    SuggestedRelatedNodes,
   },
 
   Mutation: {
