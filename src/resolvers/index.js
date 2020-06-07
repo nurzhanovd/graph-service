@@ -11,6 +11,7 @@ import {SuggestedRelatedNodes} from './RootNodes';
 import {MergeUserWithTags,InterestedTag} from './Tag';
 import {SearchForNodesAndTags} from './Search'
 import {GetRoadMap, CreateRoadMap} from './RoadMap';
+import {DauletGetUserRoadMapID} from './DauletRoadMap';
 
 /**
  * @param {Driver} driver
@@ -29,6 +30,7 @@ export default (client, driver) => ({
     GetRoadMap: GetRoadMap(driver),
     InterestedTag,
     SuggestedRelatedNodes,
+    DauletGetUserRoadMapID,
   },
 
   Mutation: {

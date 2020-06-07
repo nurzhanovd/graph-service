@@ -109,6 +109,7 @@ type Query {
   InterestedTag: [Tag]
   SuggestedRelatedNodes: [Node]
   GetRoadMap(uuid: String): GetRoadMapResponse
+  DauletGetUserRoadMapID: [String]
 }
 
 
