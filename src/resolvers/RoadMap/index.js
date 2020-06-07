@@ -107,11 +107,12 @@ ${createdRoadMapRoadMapRelationshipQuery}
 const getRoadMapQuery =
 // language=Cypher
   (uuid, username) => `
-    MATCH rm = (:RoadMap {uuid: '${uuid}'})-[rel:HAS|CONSISTS_OF*0.. {belongs_to: '${username}'}]->(n)
-    WITH collect(DISTINCT n) AS nodes,
+    MATCH (:RoadMap {uuid: "Number 1"})-[rel:HAS|CONSISTS_OF*0.. {belongs_to: "azamat"}]->(n)
+    MATCH (:RoadMap {uuid: "Number 1"})-[otherRel:HAS|CONSISTS_OF*0.. {belongs_to: "azamat"}]->(c)<-[:COMPLETE]-(user:User {username:"azamat"})
+    WITH [node in collect(DISTINCT n)| {type: labels(node), all:node}]as nodes,
          [rel IN collect(DISTINCT last(rel)) |{from: startNode(rel).uuid, to: endNode(rel).uuid}]
-         AS rels
-    RETURN nodes, rels`
+         AS rels, collect(DISTINCT c.uuid) as completedNodes
+    RETURN nodes, rels, completedNodes`
 
 
 const fields = [
@@ -139,9 +140,12 @@ export const GetRoadMap = driver => async (_, {uuid}, context) => {
   const {records} = await session.run(query)
   if (records.length) {
     const [first, ..._] = records
-    let {nodes, rels} = first.toObject()
-    nodes = nodes.map(node=>setNullForUndefined(node.properties))
-    return {nodes, rels}
+    let {nodes, rels, completedNodes} = first.toObject()
+    nodes = nodes.map(
+      node=>
+        setNullForUndefined(
+          {type:node.type, ...node.all.properties}))
+    return {nodes, rels, completedNodes}
   }
   return null
 }

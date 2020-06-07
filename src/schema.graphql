@@ -94,6 +94,7 @@ type RoadMapOrLeaf {
 type GetRoadMapResponse{
   nodes: [RoadMapOrLeaf]
   rels: [Relation]
+  completedNodes: [String]
 }
 
 type Query {
