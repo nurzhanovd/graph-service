@@ -1,0 +1,70 @@
+[
+  {
+    "uuid": "182bf308-38ad-4b50-bff3-9bda1f8a9d7c",
+    "nodes": [
+      "2decd5e8-c623-420e-a8ac-6a6ee46040f8",
+      "99578513-7894-4d7c-b453-c8fe631dc52d",
+      "2b9b0baa-833f-4bbc-8f4e-f96fa7c09844",
+      "b4918d60-8f1a-479c-befa-f064515b0102",
+      "beb28efd-65a3-4cfd-8174-67a5de7319af"
+    ]
+  },
+  {
+    "uuid": "3e033543-89a3-496c-b75a-b6965b640a26",
+    "nodes": [
+      "b1fe7846-bfe0-4fa6-9d5c-501eb651af07",
+      "ed215ab8-2780-46a2-9864-407250923cbc",
+      "57e07614-2aca-46b0-a733-0cf0f8eed7ce",
+      "cb3d5613-8554-4f8d-8c20-7c62cffc5efc",
+      "6744fbe1-3ef3-4952-97e8-9ad3e0a56497"
+    ]
+  },
+  {
+    "uuid": "f1ef1a79-24f7-4701-afcb-7c68cc413dc1",
+    "nodes": [
+      "57e07614-2aca-46b0-a733-0cf0f8eed7ce",
+      "6744fbe1-3ef3-4952-97e8-9ad3e0a56497",
+      "c7031d1d-dd03-473b-b0ba-238c4baf6033"
+    ]
+  },
+  {
+    "uuid": "59aa0b2f-e235-4168-92ce-781b7e516c63",
+    "nodes": [
+      "cb3d5613-8554-4f8d-8c20-7c62cffc5efc",
+      "b1fe7846-bfe0-4fa6-9d5c-501eb651af07",
+      "ed215ab8-2780-46a2-9864-407250923cbc"
+    ]
+  },
+  {
+    "uuid": "c305f2f6-42c0-40c7-87e8-e5abe0adafe3",
+    "nodes": [
+      "beb28efd-65a3-4cfd-8174-67a5de7319af",
+      "b4918d60-8f1a-479c-befa-f064515b0102",
+      "99578513-7894-4d7c-b453-c8fe631dc52d",
+      "2b9b0baa-833f-4bbc-8f4e-f96fa7c09844",
+      "beb28efd-65a3-4cfd-8174-67a5de7319af",
+      "2decd5e8-c623-420e-a8ac-6a6ee46040f8"
+    ]
+  },
+  {
+    "uuid": "c1479a05-0f7f-4e65-9ffc-16bdf5b4f48b",
+    "nodes": [
+      "c7031d1d-dd03-473b-b0ba-238c4baf6033",
+      "57e07614-2aca-46b0-a733-0cf0f8eed7ce",
+      "6744fbe1-3ef3-4952-97e8-9ad3e0a56497",
+      "2b9b0baa-833f-4bbc-8f4e-f96fa7c09844"
+    ]
+  },
+  {
+    "uuid": "113260bd-bcf4-4bb1-9628-5a4deefcb816",
+    "nodes": [
+      "6744fbe1-3ef3-4952-97e8-9ad3e0a56497",
+      "99578513-7894-4d7c-b453-c8fe631dc52d",
+      "57e07614-2aca-46b0-a733-0cf0f8eed7ce",
+      "2b9b0baa-833f-4bbc-8f4e-f96fa7c09844",
+      "c7031d1d-dd03-473b-b0ba-238c4baf6033",
+      "b4918d60-8f1a-479c-befa-f064515b0102",
+      "beb28efd-65a3-4cfd-8174-67a5de7319af"
+    ]
+  }
+]

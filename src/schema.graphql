@@ -19,6 +19,17 @@ type Node {
   neighbours: [Node] @cypher(statement: "MATCH (this)<-[:DEPENDS_ON]-(:Node)-[:DEPENDS_ON]->(nodes:Node) return distinct(nodes)")
 }
 
+type Leaf {
+  uuid: ID!
+  root: Boolean
+  title: String!
+  description: String
+  content: [String]
+  parent: Node @relation(name: "DEPENDS_ON", direction: "IN")
+  isComplete: Boolean @cypher(statement: "return exists((:User {username: $cypherParams.username})-[:COMPLETE]->(this))")
+  neighbours: [Node] @cypher(statement: "MATCH (this)<-[:DEPENDS_ON]-(:Leaf:Node)-[:DEPENDS_ON]->(nodes:Node) return distinct(nodes)")
+}
+
 type Tag {
   uuid: ID!
   title: String
@@ -65,7 +76,8 @@ type Query {
   SearchForNodesAndTags(searchString: String!, limit: Int, offset: Int): [GenericSearchResult]
   CurrentUser: AuthPayload
   GetCompletedNodes(nodeId: ID!): [Node]
-  RoadMapSearch(searchString: String!, rootId: ID!): [Node]
+  RoadMapSearch(searchString: String!, rootId: ID!, searchOnlyCompleted: Boolean): [Node]
+  InterestedTag: [Tag]
 }
 
 
@@ -74,6 +86,8 @@ type Mutation {
   UploadFile(file: Upload!): File!
   SignUp(username: String!, email: String!, password: String!, confirmPassword: String!): AuthPayload
   SignIn(login: String!, password: String!): AuthPayload
-  CreateRoadMap(roadMapRelation: [[String]], nodeRoadMapRelation: [[String]]): String
+#  CreateRoadMap(roadMapRelation: [[String]], nodeRoadMapRelation: [[String]]): String
   FulfillNode(uuid: ID!): Boolean
+  CreateRoadMap: [Node]
+  MergeUserWithTags(tags: [String]): Boolean
 }
