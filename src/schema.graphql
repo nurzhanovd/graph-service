@@ -65,6 +65,7 @@ type Query {
   SearchForNodesAndTags(searchString: String!, limit: Int, offset: Int): [GenericSearchResult]
   CurrentUser: AuthPayload
   GetCompletedNodes(nodeId: ID!): [Node]
+  RoadMapSearch(searchString: String!, rootId: ID!): [Node]
 }
 
 

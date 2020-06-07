@@ -7,6 +7,7 @@ import {TreeNode} from './TreeNode';
 import {FulfillNode,IsNodeFulFilled,NodeToRootPath,NodeNeighbours} from './LearningNode';
 import {GetCompletedNodes} from './LearningNode/GetCompletedNodes';
 import {CreateRoadMap} from './RoadMap';
+import {RoadMapSearch} from './RoadMap/RoadMapSearch';
 import {SearchForNodesAndTags} from './Search'
 
 /**
@@ -21,7 +22,8 @@ export default (client, driver) => ({
     NodeToRootPath: NodeToRootPath(driver),
     NodeNeighbours: NodeNeighbours(driver),
     SearchForNodesAndTags: SearchForNodesAndTags(driver),
-    GetCompletedNodes: GetCompletedNodes(driver)
+    GetCompletedNodes: GetCompletedNodes(driver),
+    RoadMapSearch: RoadMapSearch(driver)
   },
 
   Mutation: {
