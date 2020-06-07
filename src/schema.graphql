@@ -74,6 +74,6 @@ type Mutation {
   UploadFile(file: Upload!): File!
   SignUp(username: String!, email: String!, password: String!, confirmPassword: String!): AuthPayload
   SignIn(login: String!, password: String!): AuthPayload
-  CreateRoadMap(roadMapRelation: [[String]], nodeRoadMapRelation: [[String]]): String
+  CreateRoadMap(nodeRoadMapRelation: [[String]]): String
   FulfillNode(uuid: ID!): Boolean
 }
