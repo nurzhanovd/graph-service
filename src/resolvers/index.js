@@ -7,10 +7,9 @@ import {TreeNode} from './TreeNode';
 import {FulfillNode,IsNodeFulFilled,NodeToRootPath,NodeNeighbours} from './LearningNode';
 import {GetCompletedNodes} from './LearningNode/GetCompletedNodes';
 import {RoadMapSearch} from './RoadMap/RoadMapSearch';
-import {CreateRoadMap} from './RoadMap/CreateRoadMap';
 import {MergeUserWithTags,InterestedTag} from './Tag';
 import {SearchForNodesAndTags} from './Search'
-import {GetRoadMap} from './RoadMap';
+import {GetRoadMap, CreateRoadMap} from './RoadMap';
 
 /**
  * @param {Driver} driver
@@ -67,7 +66,7 @@ export default (client, driver) => ({
     SignUp: SignUp(driver),
     SignIn: SignIn(driver),
     FulfillNode: FulfillNode(driver),
-    CreateRoadMap,
+    CreateRoadMap: CreateRoadMap(driver),
     MergeUserWithTags,
   },
 })
