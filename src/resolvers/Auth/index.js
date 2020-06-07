@@ -7,8 +7,8 @@ export const CurrentUser = async (_, args, context) => {
   const { driver, req } = context;
   const username = req.user.username;
   const session = createSession(driver);
-  const { records } = await session.run(`match (p:Person) where p.username="${username}" return p`);
-  if (!records.length) {
+  const { records } = await session.run(`match (p:User) where p.username="${username}" return p`);
+  if (records.length) {
     const [record] = records;
     return omit(record.toObject().p.properties, ['password']);
   }
