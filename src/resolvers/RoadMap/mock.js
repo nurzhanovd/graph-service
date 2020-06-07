@@ -1,4 +1,4 @@
-[
+export default [
   {
     "title": "Number 1",
     "nodes": [
@@ -43,4 +43,4 @@
     ],
     "next": [""]
   }
-]
+];
