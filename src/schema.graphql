@@ -68,11 +68,32 @@ type AuthPayload {
   errors: [AuthError]
 }
 
+type RoadMap {
+  title: String
+  uuid: ID!
+#  nodes: @relation()
+#  next: @relation()
+}
+
 input RoadMapInput {
   title: String!
   uuid: String!
   nodes: [String]
   next: [String]
+}
+
+type RoadMapOrLeaf {
+  title: String
+  uuid: ID!
+  root: Boolean
+  description: String
+  content: [String]
+  type: [String]
+}
+
+type GetRoadMapResponse{
+  nodes: [RoadMapOrLeaf]
+  rels: [Relation]
 }
 
 type Query {
@@ -85,6 +106,7 @@ type Query {
   GetCompletedNodes(nodeId: ID!): [Node]
   RoadMapSearch(searchString: String!, rootId: ID!, searchOnlyCompleted: Boolean): [Node]
   InterestedTag: [Tag]
+  GetRoadMap(uuid: String): GetRoadMapResponse
 }
 
 
@@ -95,6 +117,5 @@ type Mutation {
   SignIn(login: String!, password: String!): AuthPayload
   CreateRoadMap(roadMap: [RoadMapInput]): Boolean
   FulfillNode(uuid: ID!): Boolean
-  CreateRoadMap: [Node]
   MergeUserWithTags(tags: [String]): Boolean
 }
