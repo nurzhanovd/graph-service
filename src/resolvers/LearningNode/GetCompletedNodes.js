@@ -8,8 +8,9 @@ const query = `
 
 
 export const GetCompletedNodes = driver => async (_, { nodeId }, {req}) => {
+  const { username } = req.user;
   const session = createReadSession(driver);
-  const { records } = await session.run(query, { username: 'daulet', nodeId })
+  const { records } = await session.run(query, { username: username, nodeId })
   session.close();
   return records[0].toObject().nodes.map(n => n.properties);
 }
