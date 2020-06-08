@@ -13,6 +13,7 @@ type Node {
   title: String!
   description: String
   content: [String]
+  image: String
   childes: [Node] @relation(name: "DEPENDS_ON", direction: "OUT")
   parent: Node @relation(name: "DEPENDS_ON", direction: "IN")
   isComplete: Boolean @cypher(statement: "return exists((:User {username: $cypherParams.username})-[:COMPLETE]->(this))")
@@ -28,6 +29,17 @@ type Leaf {
   parent: Node @relation(name: "DEPENDS_ON", direction: "IN")
   isComplete: Boolean @cypher(statement: "return exists((:User {username: $cypherParams.username})-[:COMPLETE]->(this))")
   neighbours: [Node] @cypher(statement: "MATCH (this)<-[:DEPENDS_ON]-(:Leaf:Node)-[:DEPENDS_ON]->(nodes:Node) return distinct(nodes)")
+}
+
+type Branch {
+  uuid: ID!
+  root: Boolean
+  title: String!
+  description: String
+  content: [String]
+  parent: Node @relation(name: "DEPENDS_ON", direction: "IN")
+  isComplete: Boolean @cypher(statement: "return exists((:User {username: $cypherParams.username})-[:COMPLETE]->(this))")
+  neighbours: [Node] @cypher(statement: "MATCH (this)<-[:DEPENDS_ON]-(:Branch:Node)-[:DEPENDS_ON]->(nodes:Node) return distinct(nodes)")
 }
 
 type Tag {
@@ -107,7 +119,9 @@ type Query {
   GetCompletedNodes(nodeId: ID!): [Node]
   RoadMapSearch(searchString: String!, rootId: ID!, searchOnlyCompleted: Boolean): [Node]
   InterestedTag: [Tag]
+  SuggestedRelatedNodes: [Node]
   GetRoadMap(uuid: String): GetRoadMapResponse
+  DauletGetUserRoadMapID: [String]
 }
 
 

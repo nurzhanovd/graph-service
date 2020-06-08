@@ -7,9 +7,11 @@ import {TreeNode} from './TreeNode';
 import {FulfillNode,IsNodeFulFilled,NodeToRootPath,NodeNeighbours} from './LearningNode';
 import {GetCompletedNodes} from './LearningNode/GetCompletedNodes';
 import {RoadMapSearch} from './RoadMap/RoadMapSearch';
+import {SuggestedRelatedNodes} from './RootNodes';
 import {MergeUserWithTags,InterestedTag} from './Tag';
 import {SearchForNodesAndTags} from './Search'
 import {GetRoadMap, CreateRoadMap} from './RoadMap';
+import {DauletGetUserRoadMapID} from './DauletRoadMap';
 
 /**
  * @param {Driver} driver
@@ -26,7 +28,9 @@ export default (client, driver) => ({
     GetCompletedNodes: GetCompletedNodes(driver),
     RoadMapSearch: RoadMapSearch(driver),
     GetRoadMap: GetRoadMap(driver),
-    InterestedTag
+    InterestedTag,
+    SuggestedRelatedNodes,
+    DauletGetUserRoadMapID,
   },
 
   Mutation: {
